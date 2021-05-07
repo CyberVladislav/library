@@ -28,27 +28,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $orders = Order::orderBy('created_at')->get();
-        $tours = Tour::all();
-
-        $gh = new GraphicHelper();
-        $colorsConfiguration = $gh->getAvailableColors();
-        $ordersDataForFirstGraphics = $gh->getDataForFirstGraphics($orders);
-        $ordersDataForSecondGraphics = $gh->getDataForSecondGraphics($orders);
-        $ordersDataForThirdGraphics = $gh->getDataForThirdGraphics($orders);
-        $ordersDataForFourthGraphics = $gh->getDataForFourthGraphics($orders, $tours, $colorsConfiguration);
-
-        return view('home',[
-            'orders' => $orders,
-            'ordersDataForFirstGraphicsData' => $ordersDataForFirstGraphics['data'],
-            'ordersDataForFirstGraphicsLineNames' => $ordersDataForFirstGraphics['linesConfiguration'],
-            'ordersDataForSecondGraphicsData' => $ordersDataForSecondGraphics['data'],
-            'ordersDataForSecondGraphicsLineNames' => $ordersDataForSecondGraphics['linesConfiguration'],
-            'ordersDataForThirdGraphicsData' => $ordersDataForThirdGraphics['data'],
-            'ordersDataForFourthGraphics' => $ordersDataForFourthGraphics,
-            'colorsConfiguration' => $colorsConfiguration,
-        ]);
+        return view('home');
     }
-
-
 }

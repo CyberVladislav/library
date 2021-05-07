@@ -16,16 +16,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [IndexController::class, 'index']);
-Route::get('/services', [IndexController::class, 'services']);
 Route::get('/contacts', [IndexController::class, 'contacts']);
-Route::get('/blog', [BlogController::class, 'list']);
-Route::get('/blog/{slug}', [BlogController::class, 'item']);
-
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
+Route::post('/ajaxAdd', [App\Http\Controllers\AjaxController::class, 'addOrder']);
+Route::get('/search', [App\Http\Controllers\SearchController::class, 'search']);
+Route::get('/sort', [App\Http\Controllers\SortController::class, 'sort']);
+Route::get ('/library/{categoryId}', [App\Http\Controllers\IndexController::class, 'choosenCategory']);
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+Route::get('/asd', [IndexController::class, 'asd']);

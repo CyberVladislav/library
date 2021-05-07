@@ -19,8 +19,10 @@ class CreateBooksTable extends Migration
             $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('author');
             $table->string('name');
+            $table->string('series');
             $table->string('publisher');
-            $table->string('year');
+            $table->string('isbn');
+            $table->integer('year');
             $table->text('excerpt');
             $table->string('image')->nullable();
             $table->integer('page');
@@ -28,6 +30,7 @@ class CreateBooksTable extends Migration
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      *
