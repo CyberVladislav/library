@@ -16,8 +16,9 @@ $(document).ready(function () {
             var surname = $('#surname').val();
             var date = $('#date').val();
             var phone = $('#phone').val();
-            if (phone == "" || date == "" || surname == "")	
+            if (phone == "" || date == "" || surname == "")	{
                 $('.auth-error').html('Заполните все поля');
+            }
             else{
                 $.ajax({ 
                     type: "POST",
@@ -28,10 +29,19 @@ $(document).ready(function () {
                         'date' : date,
                         'phone' : phone,
                     }, 
-                    success: function(result){    
+                    success: function(result){     
                         $('#surname').val('');
                         $('#date').val('');
                         $('#phone').val('');
+                        $('.js-add-book').addClass('disabled');
+                        $('.auth-error').removeClass('text-danger').html('Спасибо за заказ');
+                        setTimeout(function(){ 
+                            jQuery('#addModal').modal('hide');
+                            $('.auth-error').addClass('text-danger');            
+                            $('.js-add-book').removeClass('disabled');
+                            $('.auth-error').html('');
+                        }, 2000);
+                        location.reload();
                     },
                     error:function(error){
                         console.log(error);

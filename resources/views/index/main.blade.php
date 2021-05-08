@@ -29,17 +29,43 @@
                                     <div class="item-desc">
                                         <ul class="list-unstyled">
                                             <li class="d-flex d-md-block justify-content-center text-right">
-                                                <button type="button" class="js-adding-modal btn btn-light" bookId="{{ $book->id }}" data-toggle="modal" data-target="#addModal">Забронировать</button>
+                                                @if(Auth::check())
+                                                    @if(isset($arrayId) && in_array($book->id, $arrayId))
+                                                        <button type="button" class="btn btn-light disabled">Забронирована</button>
+                                                    @else
+                                                        <button type="button" class="js-adding-modal btn btn-light" bookId="{{ $book->id }}" data-toggle="modal" data-target="#addModal">Забронировать</button>
+                                                    @endif
+                                                @else
+                                                    <button type="button" class="js-adding-modal btn btn-light" bookId="{{ $book->id }}" data-toggle="modal" data-target="#addModal">Забронировать</button>
+                                                @endif
                                             </li>
-                                            <li><strong>Жанр: </strong>{{ $book->categories->name }}</li>
-                                            <li><strong>Серия: </strong>{{ $book->series }}</li>
-                                            <li><strong>Автор: </strong>{{ $book->author }}</li>
-                                            <li><strong>Название: </strong>{{ $book->name }}</li>
-                                            <li><strong>Издательство: </strong>{{ $book->publisher }}</li>
-                                            <li><strong>ISBN: </strong>{{ $book->isbn }}</li>
-                                            <li><strong>Год: </strong>{{ $book->year }}</li>
-                                            <li><strong>Страниц: </strong>{{ $book->page }}</li>
-                                            <li><strong>Язык: </strong>{{ $book->language }}</li>
+                                            @if(isset($book->categories->name))
+                                                <li><strong>Жанр: </strong>{{ $book->categories->name }}</li>
+                                            @endif
+                                            @isset($book->series)
+                                                <li><strong>Серия: </strong>{{ $book->series }}</li>
+                                            @endisset
+                                            @isset($book->author)
+                                                <li><strong>Автор: </strong>{{ $book->author }}</li>
+                                            @endisset
+                                            @isset($book->name)
+                                                <li><strong>Название: </strong>{{ $book->name }}</li>
+                                            @endisset
+                                            @isset($book->publisher)
+                                                <li><strong>Издательство: </strong>{{ $book->publisher }}</li>
+                                            @endisset
+                                            @isset($book->isbn)
+                                                <li><strong>ISBN: </strong>{{ $book->isbn }}</li>
+                                            @endisset
+                                            @isset($book->year)
+                                                <li><strong>Год: </strong>{{ $book->year }}</li>
+                                            @endisset
+                                            @isset($book->page)
+                                                <li><strong>Страниц: </strong>{{ $book->page }}</li>
+                                            @endisset
+                                            @isset($book->language)
+                                                <li><strong>Язык: </strong>{{ $book->language }}</li>
+                                            @endisset
                                         </ul>
                                         <p>{{ $book->excerpt}}</p>
                                     </div>
@@ -156,7 +182,7 @@
                                 <div class="form-group mt-4 align-items-center d-flex flex-column">
                                     @if(Auth::check())
                                         <a href="##" class="btn btn-primary js-add-book">Забронировать</a>
-                                        <div class="auth-error text-center text-danger"></div>
+                                        <div class="auth-error text-center text-success text-danger"></div>
                                     @else
                                         <a href="##" class="btn btn-primary disabled js-add-book">Забронировать</a>
                                         <div class="auth-error text-danger">

@@ -14,7 +14,7 @@ class SearchController extends Controller
             $books = Book::where('name','LIKE','%'.$search_text.'%')->paginate(5);
             $books->appends($request->all());
             $categories = Category::get();
-
+            
             return view('index.main', [
                 'books' => $books,
                 'categories' => $categories,
